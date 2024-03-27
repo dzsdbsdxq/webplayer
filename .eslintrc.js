@@ -84,29 +84,5 @@ module.exports = {
     // import
     'import/first': 'error',
     'import/no-duplicates': 'error',
-    'import/order': [
-      'error',
-      {
-        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-
-        pathGroups: [
-          {
-            pattern: 'vue',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: '@vue/**',
-            group: 'external',
-            position: 'before',
-          },
-          {
-            pattern: 'ant-design-vue',
-            group: 'internal',
-          },
-        ],
-        pathGroupsExcludedImportTypes: ['type'],
-      },
-    ],
   },
 };

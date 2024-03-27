@@ -1,10 +1,17 @@
 <template>
   <div class="container">
-    <router-view #="{ Component }">
-      <keep-alive>
-        <component :is="Component" />
-      </keep-alive>
-    </router-view>
+    <van-sticky>
+      <web-header></web-header>
+    </van-sticky>
+    <div class="line-t-90"></div>
+    <div class="container-main">
+      <router-view #="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
+    </div>
+    <web-footer></web-footer>
   </div>
 </template>
 
@@ -13,7 +20,12 @@
 <style lang="scss">
   .container {
     position: relative;
-    height: 100vh;
-    overflow: hidden;
+
+    &-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>
