@@ -17,6 +17,7 @@ declare module 'vue' {
     VanRow: typeof import('vant/es')['Row']
     VideoList: typeof import('./src/components/VideoList.vue')['default']
     WebFooter: typeof import('./src/components/WebFooter.vue')['default']
+    WebHandSet: typeof import('./src/components/WebHandSet.vue')['default']
     WebHeader: typeof import('./src/components/WebHeader.vue')['default']
     WebStart: typeof import('./src/components/WebStart.vue')['default']
     WebTvPanel: typeof import('./src/components/WebTvPanel.vue')['default']
