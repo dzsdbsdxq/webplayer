@@ -1,9 +1,10 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { setupPlugins } from './plugins';
-import { setupStore } from './store';
 import { setupRouter } from './router';
+import { setupStore } from './store';
 import scroll from '@/directive/scroll';
+import './styles/common.scss';
 const app = createApp(App);
 // if (import.meta.env.PROD) {
 //   import('vconsole').then((res) => {

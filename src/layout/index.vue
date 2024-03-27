@@ -13,7 +13,9 @@
 <style lang="scss">
   .container {
     position: relative;
+    width: 100%;
     height: 100vh;
     overflow: hidden;
+    background-color: #181818;
   }
 </style>

@@ -26,7 +26,7 @@ $max-device-width: 540px;
 
 /* html根元素的font-size定义，简单地将页面分为$blocks块，方便计算 */
 @mixin root-font-size() {
-  font-size: math.div(100vw, $blocks);
+  //font-size: math.div(100vw, $blocks);
 
   /* 最小宽度定义 */
   @media screen and (max-width: $min-device-width) {
@@ -52,6 +52,10 @@ $max-device-width: 540px;
 /* 单位px转化为rem */
 @function px2rem($px) {
   @return #{math.div($px, $design-width) * $blocks}rem;
+}
+/* 页面内容最大宽度 */
+@function max-width() {
+  @return 1200px;
 }
 
 /* 单位rem转化为px，可用于根据rem单位快速计算原px */

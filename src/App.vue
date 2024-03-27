@@ -7,8 +7,6 @@
 <script setup lang="ts"></script>
 
 <style lang="scss">
-  @import './styles/common';
-
   html {
     @include root-font-size();
   }

@@ -6,7 +6,6 @@ import Components from 'unplugin-vue-components/vite';
 import { VantResolver } from 'unplugin-vue-components/resolvers';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import vue from '@vitejs/plugin-vue';
-import checker from 'vite-plugin-checker';
 import type { UserConfig, ConfigEnv } from 'vite';
 
 const CWD = process.cwd();
@@ -37,13 +36,6 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         resolvers: [VantResolver()],
       }),
       // https://github.com/fi3ework/vite-plugin-checker
-      checker({
-        typescript: true,
-        vueTsc: true,
-        eslint: {
-          lintCommand: 'eslint "./src/**/*.{.vue,ts,tsx}"', // for example, lint .ts & .tsx
-        },
-      }),
       createHtmlPlugin({
         template: './index.html',
         inject: {
