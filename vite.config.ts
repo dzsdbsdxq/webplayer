@@ -1,12 +1,12 @@
-import { resolve } from 'path';
-import { loadEnv } from 'vite';
-import vueJsx from '@vitejs/plugin-vue-jsx';
-import legacy from '@vitejs/plugin-legacy';
-import Components from 'unplugin-vue-components/vite';
-import { VantResolver } from 'unplugin-vue-components/resolvers';
-import { createHtmlPlugin } from 'vite-plugin-html';
-import vue from '@vitejs/plugin-vue';
-import type { UserConfig, ConfigEnv } from 'vite';
+import legacy from "@vitejs/plugin-legacy";
+import vue from "@vitejs/plugin-vue";
+import vueJsx from "@vitejs/plugin-vue-jsx";
+import { resolve } from "path";
+import { VantResolver } from "unplugin-vue-components/resolvers";
+import Components from "unplugin-vue-components/vite";
+import type { ConfigEnv, UserConfig } from "vite";
+import { loadEnv } from "vite";
+import { createHtmlPlugin } from "vite-plugin-html";
 
 const CWD = process.cwd();
 
@@ -19,8 +19,8 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     resolve: {
       alias: [
         {
-          find: '@',
-          replacement: resolve(__dirname, './src'),
+          find: "@",
+          replacement: resolve(__dirname, "./src"),
         },
       ],
     },
@@ -30,22 +30,22 @@ export default ({ mode }: ConfigEnv): UserConfig => {
         // options are passed on to @vue/babel-plugin-jsx
       }),
       legacy({
-        targets: ['defaults', 'not IE 11'],
+        targets: ["defaults", "not IE 11"],
       }),
       Components({
         resolvers: [VantResolver()],
       }),
       // https://github.com/fi3ework/vite-plugin-checker
       createHtmlPlugin({
-        template: './index.html',
+        template: "./index.html",
         inject: {
           tags: [
             {
-              injectTo: 'head',
-              tag: 'script',
+              injectTo: "head",
+              tag: "link",
               attrs: {
-                src: 'https://www.sztv.com.cn/huodong/sj/common/js/index.aio.v5.0.2.min.js',
-                defer: true,
+                href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css",
+                rel: "stylesheet",
               },
             },
           ],
@@ -83,28 +83,28 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     server: {
       port: 9000,
       proxy: {
-        '/api': {
+        "/api": {
           // REST API
-          target: '',
+          target: "",
           changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ''),
+          rewrite: (path) => path.replace(/^\/api/, ""),
         },
       },
     },
     optimizeDeps: {
-      include: ['vant', '@vant/touch-emulator'],
-      exclude: ['vue-demi'],
+      include: ["vant", "@vant/touch-emulator"],
+      exclude: ["vue-demi"],
     },
     build: {
-      minify: 'terser',
+      minify: "terser",
       manifest: false, // 是否产出manifest.json
       sourcemap: false, // 是否产出sourcemap.json
-      outDir: 'build',
-      assetsDir: 'assets',
+      outDir: "build",
+      assetsDir: "assets",
       terserOptions: {
         compress: {
           keep_infinity: true,
-          drop_console: Object.is(VITE_DROP_CONSOLE, 'true'),
+          drop_console: Object.is(VITE_DROP_CONSOLE, "true"),
         },
       },
     },

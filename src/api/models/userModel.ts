@@ -1,43 +1,21 @@
-// 用户登录参数
-export interface LoginParams {
-  tenantId: string;
-  token: string;
-  uid: number;
+export interface videoModel {
+  id: number;
+  name: string;
+  poster: string;
+  url?: string;
+  type?: string;
+  time?: string;
+  isPlay?: boolean;
+  fileId?: string;
 }
-export interface SessionParams {
-  sessionName: string;
-}
-/**
- * @description 登录成功返回结果
- */
-export interface LoginResult {
-  username: string;
-  avatar: string;
-  token: string;
-}
-export interface SessionResult {
-  sessionId: string;
-  userId: string;
-  sessionName: string;
+
+// 获取视频详情参数
+export interface videoListParams {
   type: string;
+  from: string;
 }
 
-export interface ChatMsgItem {
-  content: string;
-  role: string;
-  id: string;
-  mine: boolean;
-  complete: boolean;
-  timestamp: number;
-}
-
-export interface TuijianParams {
-  catalogId: number;
-  page: 1;
-  pageSize: 20;
-  tenantId: 'ysz';
-}
-export interface TTSGenerateResult {
-  filename: string;
-  url: string;
+// 获取视频详情参数
+export interface videoDetailParams {
+  fileId: string;
 }

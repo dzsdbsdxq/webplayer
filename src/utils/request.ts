@@ -1,9 +1,8 @@
-import axios, { InternalAxiosRequestConfig } from 'axios';
-import qs from 'qs';
-import { closeToast, showFailToast, showLoadingToast, showToast } from 'vant';
-import { ContentTypeEnum } from './httpEnum';
-import { useUserStore } from '@/store/modules/user';
-import router from '@/router';
+import router from "@/router";
+import axios, { InternalAxiosRequestConfig } from "axios";
+import qs from "qs";
+import { closeToast, showFailToast, showLoadingToast, showToast } from "vant";
+import { ContentTypeEnum } from "./httpEnum";
 
 // create an axios instance
 const service = axios.create({
@@ -32,15 +31,16 @@ service.interceptors.request.use(
         forbidClick: true,
       });
     }
-    const userStore = useUserStore();
-    if (userStore.getSzrToken && config.headers) {
-      if (!config.noAuthorization) {
-        config.headers['Authorization'] = `Bearer ${userStore.getSzrToken}`;
-      }
-    }
-    const contentType = config.headers?.['content-type'] || config.headers?.['Content-Type'];
+    //const userStore = useUserStore();
+    // if (userStore.getSzrToken && config.headers) {
+    //   if (!config.noAuthorization) {
+    //     config.headers["Authorization"] = `Bearer ${userStore.getSzrToken}`;
+    //   }
+    // }
+    const contentType =
+      config.headers?.["content-type"] || config.headers?.["Content-Type"];
     const data = config.data;
-    if (config.method?.toLocaleUpperCase() == 'POST' && data) {
+    if (config.method?.toLocaleUpperCase() == "POST" && data) {
       if (ContentTypeEnum.FORM_DATA == contentType) {
         const fd = new FormData();
         Object.keys(data).forEach((key) => fd.append(key, data[key]));
@@ -55,7 +55,7 @@ service.interceptors.request.use(
     // do something with request error
     console.log(error); // for debug
     return Promise.reject(error);
-  },
+  }
 );
 // respone拦截器
 service.interceptors.response.use(
@@ -68,25 +68,27 @@ service.interceptors.response.use(
         // store.dispatch('FedLogOut').then(() => {
         //   location.reload()
         // })
-        router.replace('/error');
+        router.replace("/error");
       } else {
-        showToast(res.msg || '服务器访问出错了~');
+        showToast(res.msg || "服务器访问出错了~");
       }
-      return Promise.reject(res || 'error');
+      return Promise.reject(res || "error");
     } else {
       return Promise.resolve(response);
     }
   },
   (error: Error) => {
-    if (error.message?.includes('timeout')) {
-      showFailToast('请求超时!');
+    if (error.message?.includes("timeout")) {
+      showFailToast("请求超时!");
     }
     console.log(`err${error}`); // for debug
     return Promise.reject(error);
-  },
+  }
 );
 
-const request = <T = any>(config: Partial<CustomAxiosRequestConfig>): Promise<BaseResponse<T>> => {
+const request = <T = any>(
+  config: Partial<CustomAxiosRequestConfig>
+): Promise<BaseResponse<T>> => {
   return new Promise((resolve, reject) => {
     service
       .request<BaseResponse<T>>(config)
