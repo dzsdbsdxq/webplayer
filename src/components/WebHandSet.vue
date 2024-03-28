@@ -19,10 +19,19 @@
     <button @click="forwardFunc" class="forward">
       <span>Fast-forward</span>
     </button>
+    <button>
+      <span>Fast-forward</span>
+    </button>
+    <button @click="fullScreenFunc" class="fullscreen">
+      <span>Fast-forward</span>
+    </button>
+    <button>
+      <span>Fast-forward</span>
+    </button>
   </article>
 </template>
 <script setup lang="ts" name="WebHandSet">
-const em = defineEmits(["_toggle", "_change", "_menu", "_volume", "_close"]);
+const em = defineEmits(["_toggle", "_change", "_menu", "_volume", "_close","_fullscreen"]);
 const togglePlayFunc = () => {
   em("_toggle");
 };
@@ -44,6 +53,9 @@ const volumeIncFunc = () => {
 const closeVideoPageFunc = () => {
   em("_close");
 };
+const fullScreenFunc = () => {
+  em("_fullscreen");
+}
 </script>
 <style scoped lang="scss">
 article {
@@ -168,6 +180,10 @@ article {
       top: 54.66%;
     }
 
+    &:where(:nth-of-type(n + 9)) {
+      top: 64.66%;
+    }
+
     &:where(:nth-of-type(3n)) {
       left: 21%;
     }
@@ -285,6 +301,29 @@ article {
             #0000 0
           )
           61% 49% / 20% 25% no-repeat;
+    }
+
+    &.fullscreen {
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background: linear-gradient(var(--icon-color-solid) 0 0) 55% 71.75% /
+            33% 4.25% no-repeat,
+          linear-gradient(var(--icon-color-solid) 0 0) 36% 51% / 4.25% 33%
+            no-repeat,
+            linear-gradient(var(--icon-color-solid) 0 0) 72% 51% / 4.25% 33%
+            no-repeat,
+            linear-gradient(var(--icon-color-solid) 0 0) 55% 32.75% /
+            33% 4.25% no-repeat;
+
+        opacity: 0.7;
+
+      }
+
     }
 
     &.volume-dec {

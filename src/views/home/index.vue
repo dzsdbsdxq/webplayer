@@ -20,6 +20,7 @@
         @_menu="showVideoListFunc"
         @_close="closeVideoPageFunc"
         @_volume="changeVideoVolumeFunc"
+        @_fullscreen="fullScreenFunc"
       ></web-hand-set>
     </van-popup>
 
@@ -155,6 +156,10 @@ const closeVideoPageFunc = () => {
   showControl.value = false;
   showLists.value = false;
 };
+
+const fullScreenFunc = () => {
+  player.value.toggleFullScreen();
+}
 
 useKeys({
   shift: openHandSetFunc,

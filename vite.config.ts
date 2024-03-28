@@ -35,7 +35,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       Components({
         resolvers: [VantResolver()],
       }),
-      // https://github.com/fi3ework/vite-plugin-checker
+      
       createHtmlPlugin({
         template: "./index.html",
         inject: {
