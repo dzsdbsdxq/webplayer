@@ -1,16 +1,24 @@
 import request from "@/utils/request";
-import { videoListParams, videoModel } from "./models/userModel";
+import { videoDetailParams, videoListParams } from "./models/userModel";
 
 enum Api {
-  getVideoList = "/base/appLogin", // 获取视频列表
-  getVideoDetail = "", //获取视频详情
+  getVideoList = "/api/video/lists", // 获取视频列表
+  getVideoDetail = "/api/video/detail", //获取视频详情
 }
 
 //获取视频列表
-export function API_POST_GET_SONG_LIST(data: videoListParams) {
-  return request<videoModel>({
-    url: Api.getVideoList,
-    method: "get",
+export function API_POST_GET_VIDEO_LIST(data: videoListParams) {
+  return request({
+    url: `${Api.getVideoList}?folderId=${data.folderId}&marker=${data.marker}`,
+    method: "GET",
+  });
+}
+
+//获取视频详情
+export function API_POST_GET_VIDEO_DETAIL(data: videoDetailParams) {
+  return request({
+    url: `${Api.getVideoDetail}`,
+    method: "POST",
     data,
   });
 }

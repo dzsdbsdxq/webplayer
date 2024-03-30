@@ -4,15 +4,15 @@ export interface videoModel {
   poster: string;
   url?: string;
   type?: string;
-  time?: string;
+  time?: number;
   isPlay?: boolean;
   fileId?: string;
 }
 
 // 获取视频详情参数
 export interface videoListParams {
-  type: string;
-  from: string;
+  marker: string;
+  folderId: string;
 }
 
 // 获取视频详情参数

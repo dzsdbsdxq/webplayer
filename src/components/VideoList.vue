@@ -10,8 +10,16 @@
             class="player-songs__row-col__ul-li"
           >
             <div class="thumb">
-              <img class="thumb-img" :src="item.poster" alt="" />
-              <span class="thumb-time">{{ item.time }}</span>
+              <img
+                referrer="no-referrer"
+                referrerPolicy="no-referrer"
+                class="thumb-img"
+                :src="item.poster"
+                :alt="item.name"
+              />
+              <span class="thumb-time">{{
+                timeFormat(Number(item.time))
+              }}</span>
               <div class="thumb-play">
                 <svg
                   viewBox="0 0 1024 1024"
@@ -39,7 +47,7 @@
 </template>
 <script setup lang="ts" name="VideoList">
 import { videoModel } from "@/api/models/userModel";
-
+import { timeFormat } from "@/utils/timeFormat";
 defineProps({
   show: {
     type: Boolean,

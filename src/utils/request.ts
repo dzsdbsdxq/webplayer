@@ -1,12 +1,12 @@
-import router from "@/router";
 import axios, { InternalAxiosRequestConfig } from "axios";
 import qs from "qs";
-import { closeToast, showFailToast, showLoadingToast, showToast } from "vant";
+import { closeToast, showFailToast, showLoadingToast } from "vant";
+import { AuthHmac } from "./authHmac";
 import { ContentTypeEnum } from "./httpEnum";
 
 // create an axios instance
 const service = axios.create({
-  baseURL: import.meta.env.VITE_API_URL as string, // url = base api url + request url
+  baseURL: import.meta.env.VITE_BASE_API as string, // url = base api url + request url
   withCredentials: true, // send cookies when cross-domain requests
   timeout: 15000, // request timeout
 });
@@ -16,7 +16,7 @@ interface CustomAxiosRequestConfig extends InternalAxiosRequestConfig {
 }
 
 interface BaseResponse<T = any> {
-  code: number;
+  code: string;
   data: T;
   msg: string;
 }
@@ -31,12 +31,15 @@ service.interceptors.request.use(
         forbidClick: true,
       });
     }
-    //const userStore = useUserStore();
-    // if (userStore.getSzrToken && config.headers) {
-    //   if (!config.noAuthorization) {
-    //     config.headers["Authorization"] = `Bearer ${userStore.getSzrToken}`;
-    //   }
-    // }
+    if (!config.noAuthorization) {
+      const authObj = AuthHmac(
+        config.method as string,
+        <string>config.baseURL + <string>config.url
+      );
+      config.headers["X-Date"] = authObj?.Date;
+      config.headers["X-Token"] = authObj?.Token;
+      config.headers["Nonce"] = authObj?.Nonce;
+    }
     const contentType =
       config.headers?.["content-type"] || config.headers?.["Content-Type"];
     const data = config.data;
@@ -62,16 +65,7 @@ service.interceptors.response.use(
   (response) => {
     closeToast(true);
     const res = response.data;
-    if (res.code && res.code !== 200) {
-      // 登录超时,重新登录
-      if (res.code === 401) {
-        // store.dispatch('FedLogOut').then(() => {
-        //   location.reload()
-        // })
-        router.replace("/error");
-      } else {
-        showToast(res.msg || "服务器访问出错了~");
-      }
+    if (res.code !== "ok") {
       return Promise.reject(res || "error");
     } else {
       return Promise.resolve(response);

@@ -12,6 +12,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     VanCol: typeof import('vant/es')['Col']
+    VanFloatingBubble: typeof import('vant/es')['FloatingBubble']
     VanPopup: typeof import('vant/es')['Popup']
     VanRow: typeof import('vant/es')['Row']
     VideoList: typeof import('./src/components/VideoList.vue')['default']

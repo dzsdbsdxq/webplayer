@@ -1,1 +1,0 @@
-import{_ as s,r as a,o as n,c as o,a as t,w as e,b as r,d as c,K as l}from"./index-cdc8f28d.js";const u={class:"container"};const d=s({},[["render",function(s,d){const i=a("router-view");return n(),o("div",u,[t(i,null,{default:e((({Component:s})=>[(n(),r(l,null,[(n(),r(c(s)))],1024))])),_:1})])}]]);export{d as default};

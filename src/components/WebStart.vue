@@ -5,10 +5,35 @@
   </div>
 </template>
 <script setup lang="ts" name="WebStart">
+import { videoModel } from "@/api/models/userModel";
+import { API_POST_GET_VIDEO_LIST } from "@/api/user";
 import { useUserStore } from "@/store/modules/user";
 
-const openVideoPageFunc = () => {
+const getVideoListFunc = async () => {
+  const { data } = await API_POST_GET_VIDEO_LIST({
+    folderId: "660615fd598444a426ff4b9daa83b55b7d1c17b4",
+    marker: "",
+  });
+  await data.items.map((item: any, idx: number) => {
+    useUserStore().pushPlayLists({
+      id: idx,
+      name: item["name"],
+      poster: item["thumbnail"],
+      url: "",
+      type: "auto",
+      time: item["video_media_metadata"]["video_media_video_stream"][0][
+        "duration"
+      ] as number,
+      isPlay: false,
+      fileId: item["file_id"],
+    } as videoModel);
+  });
+  useUserStore().SetCurrentVideo(useUserStore().getPlayLists[0]);
   useUserStore().setCloseTv(false);
+};
+
+const openVideoPageFunc = async () => {
+  getVideoListFunc();
 };
 </script>
 <style scoped lang="scss">
